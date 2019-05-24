@@ -44,7 +44,7 @@
 
 (defun colors/init-color-identifiers-mode ()
   (use-package color-identifiers-mode
-    :commands color-identifiers-mode
+    :commands (color-identifiers-mode global-color-identifiers-mode)
     :defer t
     :init
     (progn

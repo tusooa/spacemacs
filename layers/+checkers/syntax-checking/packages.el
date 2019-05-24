@@ -18,6 +18,7 @@
 
 (defun syntax-checking/init-flycheck ()
   (use-package flycheck
+    :commands (global-flycheck-mode flycheck-mode)
     :defer t
     :init
     (progn
@@ -55,26 +56,24 @@
                   #b00000000
                   #b00000000
                   #b00000000)))
-
       (let ((bitmap (if syntax-checking-use-original-bitmaps
                         'flycheck-fringe-bitmap-double-arrow
                       'my-flycheck-fringe-indicator)))
         (flycheck-define-error-level 'error
-          :severity 2
-          :overlay-category 'flycheck-error-overlay
-          :fringe-bitmap bitmap
-          :fringe-face 'flycheck-fringe-error)
+                                     :severity 2
+                                     :overlay-category 'flycheck-error-overlay
+                                     :fringe-bitmap bitmap
+                                     :fringe-face 'flycheck-fringe-error)
         (flycheck-define-error-level 'warning
-          :severity 1
-          :overlay-category 'flycheck-warning-overlay
-          :fringe-bitmap bitmap
-          :fringe-face 'flycheck-fringe-warning)
+                                     :severity 1
+                                     :overlay-category 'flycheck-warning-overlay
+                                     :fringe-bitmap bitmap
+                                     :fringe-face 'flycheck-fringe-warning)
         (flycheck-define-error-level 'info
-          :severity 0
-          :overlay-category 'flycheck-info-overlay
-          :fringe-bitmap bitmap
-          :fringe-face 'flycheck-fringe-info))
-
+                                     :severity 0
+                                     :overlay-category 'flycheck-info-overlay
+                                     :fringe-bitmap bitmap
+                                     :fringe-face 'flycheck-fringe-info))
       ;; toggle flycheck window
       (defun spacemacs/toggle-flycheck-error-list ()
         "Toggle flycheck's error list window.
@@ -109,11 +108,12 @@ If the error list is visible, hide it.  Otherwise, show it."
         "eS" 'flycheck-set-checker-executable
         "ev" 'flycheck-verify-setup))))
 
+
 (defun syntax-checking/init-flycheck-pos-tip ()
   (use-package flycheck-pos-tip
     :if syntax-checking-enable-tooltips
     :defer t
-    :init
+    :config
     (with-eval-after-load 'flycheck
       (flycheck-pos-tip-mode))))
 
